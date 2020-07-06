@@ -32,7 +32,8 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="<?= site_url() ?>"><b><?= $title ?></b></a>
+      <img src="<?= base_url() ?>assets/uploads/logo/logo.png" style="max-width:150px;">
+      <!-- <a href="<?= site_url() ?>"><b><?= $title ?></b></a> -->
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
