@@ -50,10 +50,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'auth';
-//admin
-$route['admin'] = 'admin/home';
+//auth
 $route['login'] = 'auth';
 $route['logout'] = 'auth/logout';
+
+//admin
+$route['admin'] = 'admin/home';
 $route['profile'] = 'admin/Profile';
 $route['edit-profile'] = 'admin/Profile/profile';
 $route['data-pegawai'] = 'admin/DataPegawai';
@@ -64,6 +66,8 @@ $route['foto-kapal'] = 'admin/fotoKapal';
 $route['foto-download'] = 'admin/fotoKapal/downloadFoto';
 $route['lap-bulanan'] = 'admin/home/lapBulanan';
 
+//operasional
+$route['operasional'] = 'operasional/home';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -9,10 +9,11 @@ class FotoKapal extends CI_Controller
     $this->load->model('admin_m');
     $this->load->helper(array('file', 'download'));
     $this->load->library('upload');
-    if ($this->session->userdata('logged_in') !== TRUE) {
+    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('id_user') !== 99) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
                                        </div>');
+
       redirect('login');
     }
     //Do your magic here

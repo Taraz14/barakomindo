@@ -7,10 +7,11 @@ class DataPegawai extends CI_Controller
   {
     parent::__construct();
     $this->load->model('admin_m');
-    if ($this->session->userdata('logged_in') !== TRUE) {
+    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('id_user') !== 99) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
                                        </div>');
+
       redirect('login');
     }
     //Do your magic here
