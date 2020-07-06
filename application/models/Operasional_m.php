@@ -9,6 +9,11 @@ class Operasional_m extends CI_Model
   {
     return $this->db->get_where($this->user, ['id_user' => $id])->row();
   }
+
+  public function updateProfile($profileData, $id)
+  {
+    return $this->db->update('user', $profileData, $id);
+  }
 }
 
 /* End of file Operasional_m.php */

@@ -10,9 +10,9 @@ class Admin_m extends CI_Model
     return $this->db->get_where($this->user, ['id_user' => $id])->row();
   }
 
-  public function updateProfile($profileData)
+  public function updateProfile($profileData, $id)
   {
-    return $this->db->update('user', $profileData);
+    return $this->db->update('user', $profileData, $id);
   }
 
   /**

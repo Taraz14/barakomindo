@@ -1,12 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller
+class FotoKapal extends CI_Controller
 {
   public function __construct()
   {
     parent::__construct();
     $this->load->model('operasional_m');
+    $this->load->helper(array('file', 'download'));
+    $this->load->library('upload');
     if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 88) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
@@ -22,11 +24,10 @@ class Home extends CI_Controller
     $id = $this->session->userdata('id_user');
 
     $this->load->view('backend/layouts/wrapper', [
-      'content' => 'backend/operasional/home',
-      'title'   => 'Home',
-      'profile' => $this->operasional_m->profile($id)
+      'content' => 'backend/operasional/fotoKapal',
+      'title' => 'Foto Kapal',
+      'profile' => $this->operasional_m->profile($id),
+      // 'kapal' => $this->operasional_m->getKapal()
     ], FALSE);
   }
 }
-
-/* End of file Home.php */

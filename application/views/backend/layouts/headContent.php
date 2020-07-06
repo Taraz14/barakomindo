@@ -10,9 +10,9 @@
       <li><a href="<?php if ($this->session->userdata('role') == 99) {
                       echo site_url('admin');
                     }
-                    // if ($userdata == 88) {
-                    //   redirect('guru', 'refresh');
-                    // }
+                    if ($this->session->userdata('role') == 88) {
+                      echo site_url('operasional');
+                    }
                     // if ($userdata == 77) {
                     //   redirect('sekretaris', 'refresh');
                     ?>"><i class="fa fa-home"></i> Home</a></li>

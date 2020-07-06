@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller
+class LapBulanan extends CI_Controller
 {
   public function __construct()
   {
@@ -22,11 +22,11 @@ class Home extends CI_Controller
     $id = $this->session->userdata('id_user');
 
     $this->load->view('backend/layouts/wrapper', [
-      'content' => 'backend/operasional/home',
-      'title'   => 'Home',
+      'content' => 'backend/operasional/lapBulanan',
+      'title'   => 'Laporan Bulanan',
       'profile' => $this->operasional_m->profile($id)
     ], FALSE);
   }
 }
 
-/* End of file Home.php */
+/* End of file LapBulanan.php */

@@ -68,6 +68,11 @@ $route['lap-bulanan'] = 'admin/home/lapBulanan';
 
 //operasional
 $route['operasional'] = 'operasional/home';
+$route['op/profile'] = 'operasional/Profile';
+$route['op/data-pegawai'] = 'operasional/DataPegawai';
+$route['op/cert'] = 'operasional/CertKapal';
+$route['op/foto-kapal'] = 'operasional/fotoKapal';
+$route['op/lap-bulanan'] = 'operasional/lapBulanan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

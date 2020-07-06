@@ -6,9 +6,9 @@ class Profile extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('admin_m');
+    $this->load->model('operasional_m');
     $this->load->helper('file');
-    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 99) {
+    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 88) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
                                        </div>');
@@ -23,22 +23,22 @@ class Profile extends CI_Controller
     $id = $this->session->userdata('id_user');
 
     $this->load->view('backend/layouts/wrapper', [
-      'content' => 'backend/admin/profile',
+      'content' => 'backend/operasional/profile',
       'title'   => 'Profile',
-      'profile' => $this->admin_m->profile($id)
+      'profile' => $this->operasional_m->profile($id)
     ], FALSE);
   }
 
-  public function profile()
-  {
-    $id = $this->session->userdata('id_user');
+  // public function profile()
+  // {
+  //   $id = $this->session->userdata('id_user');
 
-    $this->load->view('backend/layouts/wrapper', [
-      'content' => 'backend/admin/editProfile',
-      'title'   => 'Edit Profile',
-      'profile' => $this->admin_m->profile($id)
-    ], FALSE);
-  }
+  //   $this->load->view('backend/layouts/wrapper', [
+  //     'content' => 'backend/operasional/editProfile',
+  //     'title'   => 'Edit Profile',
+  //     'profile' => $this->operasional_m->profile($id)
+  //   ], FALSE);
+  // }
 
   public function editProfile()
   {
@@ -64,7 +64,7 @@ class Profile extends CI_Controller
         'alamat'  => $input['alamat'],
         'no_hp' => $input['no_hp']
       ];
-      $this->admin_m->updateProfile($profileData, ['id_user' => $id]);
+      $this->operasional_m->updateProfile($profileData, ['id_user' => $id]);
       echo json_encode(array('status' => true));
     } else {
       $input = $this->input->post();
@@ -78,7 +78,7 @@ class Profile extends CI_Controller
         'no_hp' => $input['no_hp'],
         'foto' => base_url('assets/uploads/profile/' . $uploadData['uploads']['file_name'])
       ];
-      $this->admin_m->updateProfile($profileData, ['id_user' => $id]);
+      $this->operasional_m->updateProfile($profileData, ['id_user' => $id]);
       echo json_encode(array('status' => true));
     }
   }

@@ -10,9 +10,9 @@ class Auth_m extends CI_Model
     return $this->db->get_where($this->user, ['username' => $username])->row_array();
   }
 
-  public function last_login($last_login)
+  public function last_login($last_login, $id)
   {
-    return $this->db->update('user', $last_login);
+    return $this->db->update('user', $last_login, ['id_user' => $id]);
   }
 }
 

@@ -1,6 +1,18 @@
+<?php
+if ($profile->role == 99) {
+  $site = site_url('admin');
+  $prof = site_url('profile');
+} else if ($profile->role == 88) {
+  $site = site_url('operasional');
+  $prof = site_url('op/profile');
+} else if ($profile->role == 77) {
+  $site = site_url('kecab');
+  $prof = site_url('profile');
+}
+?>
 <header class="main-header">
   <!-- Logo -->
-  <a href="<?= site_url('admin') ?>" class="logo">
+  <a href="<?= $site; ?>" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>B</b>KM</span>
     <!-- logo for regular state and mobile devices -->
@@ -15,13 +27,6 @@
 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <!-- Messages: style can be found in dropdown.less-->
-
-        <!-- Notifications: style can be found in dropdown.less -->
-
-        <!-- Tasks: style can be found in dropdown.less -->
-
-        <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="<?= $profile->foto == NULL ? base_url('assets/uploads/profile/noimage.png') : $profile->foto; ?>" class="user-image" id="prof1" alt="User Image">
@@ -48,7 +53,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?= site_url('profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                <a href="<?= $prof; ?>" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
                 <a href="<?= site_url('logout'); ?>" class="btn btn-danger btn-flat">Sign out</a>

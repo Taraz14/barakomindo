@@ -8,7 +8,7 @@ class EditProfile extends CI_Controller
     parent::__construct();
     $this->load->model('admin_m');
     $this->load->helper('file');
-    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('id_user') !== 99) {
+    if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 99) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
                                        </div>');
@@ -53,7 +53,7 @@ class EditProfile extends CI_Controller
         'alamat'  => $input['alamat'],
         'no_hp' => $input['no_hp']
       ];
-      $this->admin_m->updateProfile($profileData, ['id_user' => $id]);
+      $this->admin_m->updateProfile($profileData, $id);
       echo json_encode(array('status' => true));
     } else {
       $input = $this->input->post();
@@ -67,7 +67,7 @@ class EditProfile extends CI_Controller
         'no_hp' => $input['no_hp'],
         'foto' => base_url('assets/uploads/profile/' . $uploadData['uploads']['file_name'])
       ];
-      $this->admin_m->updateProfile($profileData, ['id_user' => $id]);
+      $this->admin_m->updateProfile($profileData, $id);
       echo json_encode(array('status' => true));
     }
   }

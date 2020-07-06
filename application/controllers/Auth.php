@@ -78,7 +78,7 @@ class Auth extends CI_Controller
     } else if ($userdata['role'] == 88) {
       redirect('operasional');
     } else if ($userdata['role'] == 77) {
-      redirect('kap_cabang');
+      redirect('kecab');
     }
   }
 
@@ -88,7 +88,7 @@ class Auth extends CI_Controller
     $last_login = [
       'last_login' => time()
     ];
-    $this->auth_m->last_login($last_login, ['id_user' => $id]);
+    $this->auth_m->last_login($last_login, $id);
     $this->secure_sess->is_logout();
   }
 }
