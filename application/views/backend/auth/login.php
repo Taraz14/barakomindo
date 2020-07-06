@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?= $title ?> | Log in</title>
+  <link rel="shortcut icon" href="<?= base_url() ?>assets/uploads/logo/fav/fav.png" type="image/x-icon">
+  <link rel="icon" href="<?= base_url() ?>assets/uploads/logo/fav/fav.png" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -31,12 +33,9 @@
 
 <body class="hold-transition login-page">
   <div class="login-box">
-    <div class="login-logo">
-      <img src="<?= base_url() ?>assets/uploads/logo/logo.png" style="max-width:150px;">
-      <!-- <a href="<?= site_url() ?>"><b><?= $title ?></b></a> -->
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="login-box-body text-center">
+      <img src="<?= base_url() ?>assets/uploads/logo/logo.png" class="mx-auto" style="max-width:150px;position:cover;">
+
       <p class="login-box-msg">Welcome, sign in to <?= $title; ?></p>
       <?= $this->session->flashdata('success') ?>
       <?= $this->session->flashdata('failed') ?>
