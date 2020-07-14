@@ -43,14 +43,14 @@ class DataPegawai extends CI_Controller
   {
     $id = $this->session->userdata('id_user');
     $input = $this->input->post();
-    $getTanggal = explode('-', $input['tanggal_lahir']);
-    $tglLahir = $getTanggal[2] . '-' . $getTanggal[1] . '-' . $getTanggal[0];
+    // $getTanggal = explode('-', $input['tanggal_lahir']);
+    // $tglLahir = $getTanggal[2] . '-' . $getTanggal[1] . '-' . $getTanggal[0];
     $data = [
       'id_pendidikan' => $input['pendidikan'],
       'id_agama'      => $input['agama'],
       'nama_lengkap'  => $input['nama_p'],
       'tempat_lahir'  => $input['tempat_lahir'],
-      'tanggal_lahir' => $tglLahir,
+      'tanggal_lahir' => $input['tanggal_lahir'],
       'alamat'        => $input['alamat'],
       'gender'        => $input['gender'],
       'status'        => $input['status'],

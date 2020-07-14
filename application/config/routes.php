@@ -61,10 +61,12 @@ $route['edit-profile'] = 'admin/Profile/profile';
 $route['data-pegawai'] = 'admin/DataPegawai';
 $route['save-pegawai']  = 'admin/DataPegawai/savePegawai';
 $route['add-pegawai'] = 'admin/DataPegawai/addPegawai';
+$route['data-kapal'] = 'admin/DataKapal';
+$route['add-kapal'] = 'admin/DataKapal/addKapal';
 $route['cert'] = 'admin/CertKapal';
 $route['foto-kapal'] = 'admin/fotoKapal';
 $route['foto-download'] = 'admin/fotoKapal/downloadFoto';
-$route['lap-bulanan'] = 'admin/home/lapBulanan';
+$route['lap-bulanan'] = 'admin/LapBulanan';
 
 //operasional
 $route['operasional'] = 'operasional/home';
@@ -73,6 +75,14 @@ $route['op/data-pegawai'] = 'operasional/DataPegawai';
 $route['op/cert'] = 'operasional/CertKapal';
 $route['op/foto-kapal'] = 'operasional/fotoKapal';
 $route['op/lap-bulanan'] = 'operasional/lapBulanan';
+
+//Kepala Cabang
+$route['kecab'] = 'kecab/home';
+$route['kc/profile'] = 'kecab/Profile';
+$route['kc/data-pegawai'] = 'kecab/DataPegawai';
+$route['kc/cert'] = 'kecab/CertKapal';
+$route['kc/foto-kapal'] = 'kecab/fotoKapal';
+$route['kc/lap-bulanan'] = 'kecab/lapBulanan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

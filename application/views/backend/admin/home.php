@@ -6,7 +6,7 @@
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>0</h3>
+          <h3><?= $countPegawai ?></h3>
 
           <p>Pegawai</p>
         </div>
@@ -20,7 +20,7 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>0</h3>
+          <h3><?= $countCert ?></h3>
 
           <p>Sertifikat</p>
         </div>
@@ -35,7 +35,7 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>0</h3>
+          <h3><?= $countFkapal ?></h3>
 
           <p>Foto Kapal</p>
         </div>

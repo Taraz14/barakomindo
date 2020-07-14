@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2020 at 01:22 PM
+-- Generation Time: Jul 07, 2020 at 04:31 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -161,7 +161,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `username`, `email`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `no_hp`, `password`, `role`, `foto`, `last_login`) VALUES
-(1, 'Hesty Ningsih Huwae', 'hesty', 'hestyningsihh@gmail.com', 'Sorong', '2020-07-08', 'Km. 24, Perum. Daerah, Kabupaten Sorong', '08134456781960', '$2y$10$tYC35oIwV2GtQEHHwsNmde7pqFJxnNgVGX87I/cAZptoNJr3lQ.gy', 99, NULL, 1593943587);
+(1, 'Hesty Ningsih', 'hesty', 'hestyningsihh@gmail.com', 'Sorong', '2020-07-08', 'Km. 24, Perum. Daerah, Kabupaten Sorong', '08134456781960', '$2y$10$tYC35oIwV2GtQEHHwsNmde7pqFJxnNgVGX87I/cAZptoNJr3lQ.gy', 99, 'http://localhost/barakomindo/assets/uploads/profile/1594045083412.jpg', 1594050483),
+(2, 'Fitri Febrianty', 'fitri', 'fitri@gmail.com', 'Sorong', '2020-07-08', 'Km. 24, Perum. Daerah, Kabupaten Sorong', '08134471245637', '$2y$10$acZ18mdv3OZowBaYQI/l2emkc9QonoOijWVsoNvPFAO6iN4nyTzra', 88, NULL, 1594051116);
 
 --
 -- Indexes for dumped tables
@@ -243,7 +244,7 @@ ALTER TABLE `sertifikat_kapal`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

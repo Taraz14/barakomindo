@@ -82,6 +82,11 @@ class Admin_m extends CI_Model
    * Sertifikat
    * @return array
    */
+  public function getNKapal()
+  {
+    return $this->db->get('kapal')->result();
+  }
+
   public function saveCert($cert)
   {
     if ($this->db->insert('sertifikat_kapal', $cert)) {
@@ -94,12 +99,14 @@ class Admin_m extends CI_Model
   private function queryCert()
   {
     $this->db->select('*');
-    $this->db->from('sertifikat_kapal');
+    $this->db->from('sertifikat_kapal sk');
+    $this->db->join('kapal k', 'sk.id_kapal = k.id_kapal', 'left');
+
 
     if ($this->input->get('search')['value']) {
-      $this->db->like('nama_kapal', $this->input->get('search')['value']);
-      $this->db->or_like('nama_sertifikat', $this->input->get('search')['value']);
-      $this->db->or_like('upload_at', $this->input->get('search')['value']);
+      $this->db->like('k.nama_kapal', $this->input->get('search')['value']);
+      $this->db->or_like('sk.nama_sertifikat', $this->input->get('search')['value']);
+      // $this->db->or_like('sk.upload_at', $this->input->get('search')['value']);
     }
 
     if ($this->input->get('order')) {
@@ -156,6 +163,59 @@ class Admin_m extends CI_Model
   public function getKapal()
   {
     return $this->db->get('foto_kapal')->result();
+  }
+
+  /**
+   * Data Kapal
+   */
+  public function saveKapal($data)
+  {
+    $this->db->insert('kapal', $data);
+    return $this->db->insert_id();
+  }
+
+  private function queryKapal()
+  {
+    $this->db->select('*');
+    $this->db->from('kapal');
+
+    if ($this->input->get('search')['value']) {
+      $this->db->like('nama_kapal', $this->input->get('search')['value']);
+      $this->db->or_like('nama_pemilik', $this->input->get('search')['value']);
+      $this->db->or_like('kebangsaan', $this->input->get('search')['value']);
+      $this->db->or_like('gt', $this->input->get('search')['value']);
+      $this->db->or_like('call_sign', $this->input->get('search')['value']);
+    }
+
+    if ($this->input->get('order')) {
+      $this->db->order_by(
+        $this->input->get('order')['0']['column'],
+        $this->input->get('order')['0']['dir']
+      );
+    } else {
+      $this->db->order_by('submit_at', 'desc');
+    }
+  }
+
+  public function dataKapal()
+  {
+    self::queryKapal();
+    if ($this->input->get('length') !== -1) {
+      $this->db->limit($this->input->get('length'), $this->input->get('start'));
+    }
+    return $this->db->get()->result();
+  }
+
+  public function filterKapal()
+  {
+    self::queryKapal();
+    return $this->db->get()->num_rows();
+  }
+
+  public function countKapal()
+  {
+    $this->db->from('kapal');
+    return $this->db->count_all_results();
   }
 }
 

@@ -50,6 +50,9 @@
                               }
                               if ($profile->role == 88) {
                                 echo 'skin-red';
+                              }
+                              if ($profile->role == 77) {
+                                echo 'skin-purple-light';
                               } ?> sidebar-mini">
   <!-- jQuery 3 -->
   <script src="<?= base_url() ?>assets/backend/bower_components/jquery/dist/jquery.min.js"></script>

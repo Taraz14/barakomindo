@@ -11,9 +11,14 @@
         <form id="form-sertifikat" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group row">
-              <label for="namaKapal" class=" col-sm-2">Nama Kapal</label>
+              <label for="kapal" class=" col-sm-2">Kapal</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="namaKapal" placeholder="Nama Kapal">
+                <select class="form-control" name="kapal">
+                  <option selected hidden>--Pilih Kapal--</option>
+                  <?php foreach ($data_kapal as $val) : ?>
+                    <option value="<?= $val->id_kapal ?>"><?= $val->nama_kapal ?></option>
+                  <?php endforeach; ?>
+                </select>
               </div>
             </div>
             <div class="form-group row">
@@ -29,7 +34,7 @@
               </div>
               <div class=" col-sm-5">
                 <div class="input-group">
-                  <input type="text" class="form-control" name="tanggal_upload" value="<?= date('d-m-Y'); ?>" readonly>
+                  <input type="text" class="form-control" id="reservation" name="tanggal_upload" value="<?= date('d-m-Y'); ?>" readonly>
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
@@ -85,6 +90,9 @@
   }
 
   $(function() {
+    //Date range picker
+    $('#reservation').daterangepicker()
+
     //ajax save
     $('#save').click(function() {
       var data = new FormData($('#form-sertifikat')[0]);

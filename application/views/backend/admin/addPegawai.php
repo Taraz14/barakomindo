@@ -143,7 +143,7 @@
           console.log(data);
           if (data.status == true) {
             swal({
-              title: 'Tambah Kelas',
+              title: 'Tambah Pegawai',
               text: 'Pegawai berhasil ditambahkan',
               icon: 'success'
             });

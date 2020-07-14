@@ -30,6 +30,14 @@
             <span>Data Pegawai</span>
           </a>
         </li>
+        <li class="<?php if ($this->uri->segment(1) == 'data-kapal' || $this->uri->segment(1) == 'add-kapal') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('data-kapal') ?>">
+            <i class="fa fa-ship"></i>
+            <span>Data Kapal</span>
+          </a>
+        </li>
         <li class="<?php if ($this->uri->segment(1) == 'cert') {
                       echo 'active';
                     } ?>">
@@ -41,7 +49,7 @@
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('foto-kapal') ?>">
-            <i class="fa fa-ship"></i>
+            <i class="fa fa-picture-o"></i>
             <span>Foto Kapal</span>
           </a>
         </li>
@@ -111,6 +119,68 @@
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('op/lap-bulanan') ?>">
+            <i class="fa fa-laptop"></i>
+            <span>Laporan Bulanan</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+<?php endif; ?>
+
+<!-- Sidebar Operasional -->
+<?php if ($this->session->userdata('role') == 77) : ?>
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="<?= $profile->foto == NULL ? base_url('assets/uploads/profile/noimage.png') : $profile->foto; ?>" class="img-circle" id="prof3" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><?= $profile->nama; ?></p>
+          <i class="fa fa-calendar"></i> <?= date("Y-m-d"); ?>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">NAVIGASI UTAMA</li>
+        <li class="<?php if ($this->uri->segment(1) == 'kecab' || $this->uri->segment(1) == 'profile') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kecab') ?>">
+            <i class="fa fa-home"></i> <span>Home</span>
+          </a>
+        </li>
+        <li class="<?php if ($this->uri->segment(2) == 'data-pegawai') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kc/data-pegawai') ?>">
+            <i class="fa fa-users"></i>
+            <span>Data Pegawai</span>
+          </a>
+        </li>
+        <li class="<?php if ($this->uri->segment(2) == 'cert') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kc/cert') ?>">
+            <i class="fa fa-files-o"></i> <span>Sertifikat Kapal</span>
+          </a>
+        </li>
+        <li class="<?php if ($this->uri->segment(2) == 'foto-kapal') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kc/foto-kapal') ?>">
+            <i class="fa fa-ship"></i>
+            <span>Foto Kapal</span>
+          </a>
+        </li>
+        <li class="<?php if ($this->uri->segment(2) == 'lap-bulanan') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kc/lap-bulanan') ?>">
             <i class="fa fa-laptop"></i>
             <span>Laporan Bulanan</span>
           </a>

@@ -26,12 +26,14 @@ class CertKapal extends CI_Controller
     $this->load->view('backend/layouts/wrapper', [
       'content' => 'backend/admin/certKapal',
       'title' => 'Sertifikat Kapal',
-      'profile' => $this->admin_m->profile($id)
+      'profile' => $this->admin_m->profile($id),
+      'data_kapal' => $this->admin_m->getNKapal()
     ], FALSE);
   }
 
   public function uploadCert()
   {
+    $id = $this->session->userdata('id_user');
     $config['upload_path']   = './assets/uploads/sertifikat/';
     $config['allowed_types'] = 'pdf';
     $config['file_name']  = round(microtime(true) * 1000);
@@ -43,7 +45,8 @@ class CertKapal extends CI_Controller
     } else {
       $uploadData = array('uploads' => $this->upload->data());
       $cert = [
-        'nama_kapal' => $this->input->post('namaKapal'), //uploadCert
+        'id_user' => $id,
+        'id_kapal' => $this->input->post('kapal'), //uploadCert
         'nama_sertifikat' => $this->input->post('namaCert'),
         'file'  => base_url('assets/uploads/sertifikat/' . $uploadData['uploads']['file_name']),
         'upload_at' => time()
