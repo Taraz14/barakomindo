@@ -55,28 +55,30 @@
   })
 
   function hapusPegawai(id) {
-    swal({
+    swal.fire({
         title: "Yakin hapus pegawai?",
         text: "Jika sudah terhapus maka, tidak dapat dikembalikan!",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!'
       })
       .then((willDelete) => {
-        if (willDelete) {
+        if (willDelete.value) {
           $.ajax({
             url: "<?= site_url('admin/DataPegawai/hapusPegawai/') ?>" + id,
             type: "post",
             dataType: "json",
             success: function(data) {
-              swal("Satu pegawai telah dihapus!", {
+              swal.fire("Satu pegawai telah dihapus!", {
                 icon: "success",
               });
               reload_table();
             }
           });
         } else {
-          swal("Satu pegawai batal dihapus!");
+          swal.fire("Satu pegawai batal dihapus!");
         }
       });
   }

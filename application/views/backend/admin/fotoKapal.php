@@ -125,9 +125,14 @@
         <form id="form-kapal" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group row">
-              <label for="namaKapal" class=" col-sm-2">Nama Kapal</label>
+              <label for="kapal" class=" col-sm-2">Kapal</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="namaKapal" placeholder="Nama Kapal">
+                <select class="form-control" name="kapal">
+                  <option selected hidden>--Pilih Kapal--</option>
+                  <?php foreach ($data_kapal as $val) : ?>
+                    <option value="<?= $val->id_kapal ?>"><?= $val->nama_kapal ?></option>
+                  <?php endforeach; ?>
+                </select>
               </div>
             </div>
             <div class="form-group row">
@@ -155,12 +160,12 @@
                     $i = 0;
                     foreach ($kapal as $valKapal) { ?>
                       <li>
-                        <span class="mailbox-attachment-icon has-img"><img class="" src="<?= $valKapal->foto; ?>" alt="<?= $valKapal->nama_fkapal . ' - ' . $valKapal->id_fkapal; ?>" id="myImg<?= $valKapal->id_fkapal; ?>"></span>
+                        <span class="mailbox-attachment-icon has-img"><img class="" src="<?= $valKapal->foto; ?>" alt="<?= $valKapal->nama_kapal . ' - ' . $valKapal->id_fkapal; ?>" id="myImg<?= $valKapal->id_fkapal; ?>"></span>
 
                         <div class="mailbox-attachment-info">
-                          <div class="mailbox-attachment-name"><i class="fa fa-camera"></i> <?= $valKapal->nama_fkapal; ?></div>
+                          <div class="mailbox-attachment-name"><i class="fa fa-camera"></i> <?= $valKapal->nama_kapal; ?></div>
                           <span class="mailbox-attachment-size">
-                            2.67 MB
+                            <a href="#">Hapus Foto</a>
                             <a href="<?= site_url('foto-download/') . $valKapal->foto ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                           </span>
                         </div>

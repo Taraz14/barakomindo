@@ -26,7 +26,8 @@ class LapBulanan extends CI_Controller
       'title'   => 'Laporan Bulanan',
       'profile' => $this->admin_m->profile($id),
       'countCert' => $this->lap_m->countCert(),
-      'countFkapal' => $this->lap_m->countFkapal()
+      'countFkapal' => $this->lap_m->countFkapal(),
+      'countPegawai' => $this->lap_m->countPegawai()
     ], FALSE);
   }
 }

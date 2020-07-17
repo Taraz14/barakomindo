@@ -13,17 +13,18 @@
             <div class="form-group row">
               <label for="nama_pegawai" class=" col-sm-2">Nama Lengkap</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="nama_p" placeholder="Nama Lengkap">
+                <input type="text" class="form-control" name="nama_p" placeholder="Nama Lengkap" id="nama">
+                <small class="nama"></small>
               </div>
             </div>
             <div class="form-group row">
               <label for="tempat_lahir" class=" col-sm-2">Tempat/Tanggal Lahir</label>
               <div class="col-sm-5">
-                <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
+                <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" id="tlahir" onkeyup="this.value=this.value.replace(/[^a-z]\/[^A-Z]/g,'');">
               </div>
               <div class="col-sm-5">
                 <div class="input-group">
-                  <input type="text" class="form-control" id="lahirPegawai" name="tanggal_lahir" placeholder="20-02-2020" readonly>
+                  <input type="text" class="form-control" id="lahirPegawai" name="tanggal_lahir" value="<?= date('d-m-Y') ?>" placeholder="20-02-2020" readonly>
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
@@ -76,7 +77,7 @@
               <label for="status" class=" col-sm-2">Status</label>
               <div class="container row">
                 <div class="col-sm-2">
-                  <input type="radio" name="status" value="Sudah Menikah"> Sudah Menikah
+                  <input type="radio" name="status" value="Sudah Menikah" checked> Sudah Menikah
                 </div>
                 <div class="col-sm-2">
                   <input type="radio" name="status" vlaue="Belum Menikah"> Belum Menikah
@@ -86,13 +87,15 @@
             <div class="form-group row">
               <label for="nik" class=" col-sm-2">NIK</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="nik" id="nik" placeholder="NIK 16 digit">
+                <input type="text" class="form-control" name="nik" id="nik" placeholder="NIK 16 digit" onblur="ifExistsNik();">
+                <small class="nik"></small>
               </div>
             </div>
             <div class="form-group row">
               <label for="npwp" class=" col-sm-2">NPWP</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="npwp" id="npwp" placeholder="NPWP 15 digit">
+                <input type="text" class="form-control" name="npwp" id="npwp" placeholder="NPWP 15 digit" onblur="ifExistsNpwp();">
+                <small class="npwp"></small>
               </div>
             </div>
             <div class="form-group row">
@@ -113,6 +116,7 @@
                 <div class="row">
                   <div class="col-sm-2">
                     <a class="btn btn-success btn-block" id="save">Simpan <i class="fa fa-send"></i></a>
+                    <!-- <button class="btn btn-success btn-block">Simpan <i class="fa fa-send"></i></button> -->
                   </div>
                   <div class="col-sm-2">
                     <a href="<?= site_url('data-pegawai'); ?>" class="btn btn-danger btn-block">Kembali <i class="fa fa-chevron-left"></i></a>
@@ -128,6 +132,64 @@
 
 </section>
 <script>
+  function ifExistsNik() {
+
+    var nik = $("#nik").val();
+
+    $.ajax({
+      type: "post",
+      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
+      data: {
+        nik: nik
+      },
+      success: function(response) {
+        if (nik == '') {
+          $('.nik').html('<i style="color:red">NIK wajib diisi</i>');
+        } else {
+          if (nik.length < 16) {
+            $('.nik').html('<i style="color:red">NIK tidak lengkap</i>');
+          } else {
+            if (response == true) {
+              $('.nik').html('<i style="color:green">NIK dapat digunakan</i>');
+            } else {
+              $('.nik').html('<i style="color:red">NIK sudah terdaftar</i>');
+            }
+
+          }
+        }
+      }
+    });
+  }
+
+  function ifExistsNpwp() {
+
+    var npwp = $("#npwp").val();
+
+    $.ajax({
+      type: "post",
+      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
+      data: {
+        npwp: npwp
+      },
+      success: function(response) {
+        if (npwp == '') {
+          $('.npwp').html('<i style="color:red">NPWP wajib diisi</i>');
+        } else {
+          if (npwp.length < 15) {
+            $('.npwp').html('<i style="color:red">NPWP tidak lengkap</i>');
+          } else {
+            if (response == true) {
+              $('.npwp').html('<i style="color:green">NPWP dapat digunakan</i>');
+            } else {
+              $('.npwp').html('<i style="color:red">NPWP sudah terdaftar</i>');
+            }
+
+          }
+        }
+      }
+    });
+  }
+
   $(function() {
     //ajax save
     $('#save').click(function() {
@@ -142,19 +204,37 @@
         success: function(data) {
           console.log(data);
           if (data.status == true) {
-            swal({
+            swal.fire({
               title: 'Tambah Pegawai',
               text: 'Pegawai berhasil ditambahkan',
-              icon: 'success'
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500
             });
-            // window.location.href = "<?= site_url('data-pegawai'); ?>")
           } else {
-            swal({
-              title: 'Gagal',
-              text: 'Tidak diketahui',
-              icon: 'error',
-              dangerMode: 'true'
-            })
+            var datax = [data.npwp, data.nik, data.gender, data.alamat,
+              data.tempat_lahir, data.nama_lengkap, data.id_agama, data.id_pendidikan
+            ];
+            if (data.npwp == "") {
+              swal.fire({
+                title: 'Gagal',
+                text: 'Harap isi data lengkap',
+                icon: 'error',
+                dangerMode: 'true',
+                showConfirmButton: false,
+                timer: 1500
+              });
+            } else {
+              swal.fire({
+                title: 'Gagal',
+                text: 'Pegawai sudah terdaftar',
+                icon: 'error',
+                dangerMode: 'true',
+                showConfirmButton: false,
+                timer: 1500
+              })
+
+            }
           }
         }
 
@@ -180,4 +260,18 @@
   $("#npwp").inputFilter(function(value) {
     return /^\d*$/.test(value) && (value === "" || parseInt(value.length) <= 15);
   });
+
+  $('#form-pegawai').validate();
+  setTimeout(function() {
+    $('#nama').rules('add', {
+      required: true
+    })
+    // $('#nama, #tlahir').validate({
+    //   rules: {
+    //     myField: {
+    //       lettersonly: true
+    //     }
+    //   }
+    // });
+  }, 0);
 </script>

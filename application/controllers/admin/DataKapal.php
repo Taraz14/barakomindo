@@ -67,7 +67,7 @@ class DataKapal extends CI_Controller
       $temp[] = htmlspecialchars($kapVal->kebangsaan, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($kapVal->gt, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($kapVal->call_sign, ENT_QUOTES, 'UTF-8');
-      $temp[] = htmlspecialchars($kapVal->submit_at, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", $kapVal->submit_at), ENT_QUOTES, 'UTF-8');
       $temp[] = '
       <a href="javascript:void(0)" onclick="detailKapal(' . "'" . $kapVal->id_kapal . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Detail" target="">
           <i class="glyphicon glyphicon-eye-open" style="color:#0a668e"></i>

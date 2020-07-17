@@ -22,7 +22,7 @@
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
         </li>
-        <li class="<?php if ($this->uri->segment(1) == 'data-pegawai') {
+        <li class="<?php if ($this->uri->segment(1) == 'data-pegawai' || $this->uri->segment(1) == 'add-pegawai') {
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('data-pegawai') ?>">

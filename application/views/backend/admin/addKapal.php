@@ -78,14 +78,14 @@
         success: function(data) {
           console.log(data);
           if (data.status == true) {
-            swal({
+            swal.fire({
               title: 'Tambah Kapal',
               text: 'Kapal berhasil ditambahkan',
               icon: 'success'
             });
 
           } else {
-            swal({
+            swal.fire({
               title: 'Gagal',
               text: 'Tidak diketahui',
               icon: 'error',

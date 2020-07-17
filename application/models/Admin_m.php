@@ -19,6 +19,18 @@ class Admin_m extends CI_Model
    * Pegawai
    * ========
    */
+  public function exists($npwp, $nik)
+  {
+    $this->db->select('*')
+      ->from('pegawai')
+      ->group_start()
+      ->where('npwp', $npwp)
+      ->or_where('nik', $nik)
+      ->group_end();
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
   public function savePegawai($data)
   {
     $this->db->insert('pegawai', $data);
@@ -162,6 +174,7 @@ class Admin_m extends CI_Model
 
   public function getKapal()
   {
+    $this->db->join('kapal k ', 'foto_kapal.id_kapal = k.id_kapal', 'left');
     return $this->db->get('foto_kapal')->result();
   }
 

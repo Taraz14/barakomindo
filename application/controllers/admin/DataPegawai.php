@@ -7,6 +7,7 @@ class DataPegawai extends CI_Controller
   {
     parent::__construct();
     $this->load->model('admin_m');
+    $this->load->library('form_validation');
     if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 99) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
                                        Maaf, Anda harus login!
@@ -39,30 +40,66 @@ class DataPegawai extends CI_Controller
     ], FALSE);
   }
 
+  function exists()
+  {
+    $npwp = $this->input->post('npwp');
+    $nik = $this->input->post('nik');
+
+    $exists = $this->admin_m->exists($npwp, $nik);
+
+    $count = count($exists);
+    // echo $count 
+
+    if (empty($count)) {
+      echo true;
+    } else {
+      echo false;
+    }
+  }
+
   public function savePegawai()
   {
     $id = $this->session->userdata('id_user');
     $input = $this->input->post();
-    // $getTanggal = explode('-', $input['tanggal_lahir']);
-    // $tglLahir = $getTanggal[2] . '-' . $getTanggal[1] . '-' . $getTanggal[0];
-    $data = [
-      'id_pendidikan' => $input['pendidikan'],
-      'id_agama'      => $input['agama'],
-      'nama_lengkap'  => $input['nama_p'],
-      'tempat_lahir'  => $input['tempat_lahir'],
-      'tanggal_lahir' => $input['tanggal_lahir'],
-      'alamat'        => $input['alamat'],
-      'gender'        => $input['gender'],
-      'status'        => $input['status'],
-      'nik'           => $input['nik'],
-      'npwp'          => $input['npwp'],
-      'email'         => $input['email'],
-      'no_hp'         => $input['no_hp'],
-      'submit_at'     => time()
-    ];
+    $explode = explode("-", $input['tanggal_lahir']);
+    $tgl = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
 
-    $this->admin_m->savePegawai($data);
-    echo json_encode(['status' => TRUE]);
+    $this->form_validation->set_rules('npwp', 'NPWP', 'required|is_unique[pegawai.npwp]');
+    $this->form_validation->set_message('is_unique', '%s sudah ada');
+    if ($this->form_validation->run() == FALSE) {
+      // echo json_encode(array('status' => FALSE));
+      $data = [
+        'id_pendidikan' => form_error('pendidikan'),
+        'id_agama'      => form_error('agama'),
+        'nama_lengkap'  => form_error('nama_p'),
+        'tempat_lahir'  => form_error('tempat_lahir'),
+        'alamat'        => form_error('alamat'),
+        'gender'        => form_error('gender'),
+        'nik'           => form_error('nik'),
+        'npwp'          => form_error('npwp'),
+      ];
+      echo json_encode($data);
+    } else {
+      $data = [
+        'id_pendidikan' => $input['pendidikan'],
+        'id_agama'      => $input['agama'],
+        'nama_lengkap'  => $input['nama_p'],
+        'tempat_lahir'  => $input['tempat_lahir'],
+        'tanggal_lahir' => $tgl,
+        'alamat'        => $input['alamat'],
+        'gender'        => $input['gender'],
+        'status'        => $input['status'],
+        'nik'           => $input['nik'],
+        'npwp'          => $input['npwp'],
+        'email'         => $input['email'],
+        'no_hp'         => $input['no_hp'],
+        'submit_at'     => time()
+      ];
+
+      $this->admin_m->savePegawai($data);
+      echo json_encode(['status' => TRUE]);
+      // echo json_encode($data);
+    }
   }
 
   public function getPegawai()

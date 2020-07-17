@@ -1,5 +1,5 @@
 </div>
-<script src="<?= base_url() ?>assets/backend/bower_components/sweetalert/sweetalert.min.js"></script>
+<script src="<?= base_url() ?>assets/backend/bower_components/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <!-- Sparkline -->
 <script src="<?= base_url() ?>assets/backend/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -7,6 +7,8 @@
 <script src="<?= base_url() ?>assets/backend/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?= base_url() ?>assets/backend/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+<!-- select2 -->
+<script src="<?= base_url() ?>assets/backend/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?= base_url() ?>assets/backend/bower_components/moment/min/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/backend/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>

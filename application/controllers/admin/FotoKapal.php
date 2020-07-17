@@ -27,7 +27,8 @@ class FotoKapal extends CI_Controller
       'content' => 'backend/admin/fotoKapal',
       'title' => 'Foto Kapal',
       'profile' => $this->admin_m->profile($id),
-      'kapal' => $this->admin_m->getKapal()
+      'kapal' => $this->admin_m->getKapal(),
+      'data_kapal' => $this->admin_m->getNKapal()
     ], FALSE);
   }
 
@@ -52,7 +53,7 @@ class FotoKapal extends CI_Controller
     } else {
       $uploadData = array('uploads' => $this->upload->data());
       $fkapal = [
-        'nama_fkapal' => $this->input->post('namaKapal'), //uploadCert
+        'id_kapal' => $this->input->post('kapal'), //kapal
         'foto'  => base_url('assets/uploads/kapal/' . $uploadData['uploads']['file_name']),
         'post_at' => time()
       ];

@@ -33,7 +33,14 @@
   <!-- Datatables -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/datatables/datatables.css">
-
+  <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/datatables/datatables.css"> -->
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/backend/bower_components/sweetalert2/dist/sweetalert2.min.css">
+  <style>
+    .swal2-popup {
+      font-size: 1.6rem !important;
+    }
+  </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -67,4 +74,7 @@
   <!-- datepicker -->
   <script src="<?= base_url() ?>assets/backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
   <script src="<?= base_url() ?>assets/backend/own/inputFilter.js"></script>
+  <script src="<?= base_url() ?>assets/backend/own/jquery.validation.js"></script>
+  <script src="<?= base_url() ?>assets/backend/own/additional-methods.js"></script>
+
   <div class="wrapper">
