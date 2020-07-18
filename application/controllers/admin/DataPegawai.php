@@ -59,15 +59,17 @@ class DataPegawai extends CI_Controller
 
   public function savePegawai()
   {
+    // $this->load->library('MY_Form_validation');
     $id = $this->session->userdata('id_user');
     $input = $this->input->post();
     $explode = explode("-", $input['tanggal_lahir']);
     $tgl = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
 
     $this->form_validation->set_rules('npwp', 'NPWP', 'required|is_unique[pegawai.npwp]');
-    $this->form_validation->set_message('is_unique', '%s sudah ada');
+    $this->form_validation->set_rules('nik', 'NIK', 'required|is_unique[pegawai.nik]');
+    $this->form_validation->set_rules('nama_p', 'Nama', 'required');
+    $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
     if ($this->form_validation->run() == FALSE) {
-      // echo json_encode(array('status' => FALSE));
       $data = [
         'id_pendidikan' => form_error('pendidikan'),
         'id_agama'      => form_error('agama'),
@@ -78,7 +80,8 @@ class DataPegawai extends CI_Controller
         'nik'           => form_error('nik'),
         'npwp'          => form_error('npwp'),
       ];
-      echo json_encode($data);
+      echo json_encode(array('status' => FALSE));
+      // echo json_encode($data);
     } else {
       $data = [
         'id_pendidikan' => $input['pendidikan'],

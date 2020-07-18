@@ -11,9 +11,9 @@
         <form action="" method="post" id="form-pegawai">
           <div class="box-body">
             <div class="form-group row">
-              <label for="nama_pegawai" class=" col-sm-2">Nama Lengkap</label>
+              <label for="nama_p" class=" col-sm-2">Nama Lengkap</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="nama_p" placeholder="Nama Lengkap" id="nama">
+                <input type="text" class="form-control" name="nama_p" placeholder="Nama Lengkap" id="nama" onkeydown="alphaOnly(event);">
                 <small class="nama"></small>
               </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="form-group row">
               <label for="no_hp" class=" col-sm-2">Nomor HP</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="no_hp" placeholder="+62-812-3456-7890">
+                <input type="text" class="form-control" name="no_hp" id="hp" placeholder="08123456789">
               </div>
             </div>
             <div class="form-group row">
@@ -132,63 +132,10 @@
 
 </section>
 <script>
-  function ifExistsNik() {
-
-    var nik = $("#nik").val();
-
-    $.ajax({
-      type: "post",
-      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
-      data: {
-        nik: nik
-      },
-      success: function(response) {
-        if (nik == '') {
-          $('.nik').html('<i style="color:red">NIK wajib diisi</i>');
-        } else {
-          if (nik.length < 16) {
-            $('.nik').html('<i style="color:red">NIK tidak lengkap</i>');
-          } else {
-            if (response == true) {
-              $('.nik').html('<i style="color:green">NIK dapat digunakan</i>');
-            } else {
-              $('.nik').html('<i style="color:red">NIK sudah terdaftar</i>');
-            }
-
-          }
-        }
-      }
-    });
-  }
-
-  function ifExistsNpwp() {
-
-    var npwp = $("#npwp").val();
-
-    $.ajax({
-      type: "post",
-      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
-      data: {
-        npwp: npwp
-      },
-      success: function(response) {
-        if (npwp == '') {
-          $('.npwp').html('<i style="color:red">NPWP wajib diisi</i>');
-        } else {
-          if (npwp.length < 15) {
-            $('.npwp').html('<i style="color:red">NPWP tidak lengkap</i>');
-          } else {
-            if (response == true) {
-              $('.npwp').html('<i style="color:green">NPWP dapat digunakan</i>');
-            } else {
-              $('.npwp').html('<i style="color:red">NPWP sudah terdaftar</i>');
-            }
-
-          }
-        }
-      }
-    });
-  }
+  function alphaOnly(event) {
+    var key = event.keyCode;
+    return ((key >= 65 && key <= 90) || key == 8);
+  };
 
   $(function() {
     //ajax save
@@ -202,7 +149,7 @@
         dataType: 'json',
         data: data,
         success: function(data) {
-          console.log(data);
+          // console.log(data);
           if (data.status == true) {
             swal.fire({
               title: 'Tambah Pegawai',
@@ -211,35 +158,20 @@
               showConfirmButton: false,
               timer: 1500
             });
-          } else {
-            var datax = [data.npwp, data.nik, data.gender, data.alamat,
-              data.tempat_lahir, data.nama_lengkap, data.id_agama, data.id_pendidikan
-            ];
-            if (data.npwp == "") {
-              swal.fire({
-                title: 'Gagal',
-                text: 'Harap isi data lengkap',
-                icon: 'error',
-                dangerMode: 'true',
-                showConfirmButton: false,
-                timer: 1500
-              });
-            } else {
-              swal.fire({
-                title: 'Gagal',
-                text: 'Pegawai sudah terdaftar',
-                icon: 'error',
-                dangerMode: 'true',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-            }
           }
-        }
-
+          if (data.status == false) {
+            swal.fire({
+              title: 'Gagal',
+              text: 'Harap periksa lagi',
+              icon: 'error',
+              dangerMode: 'true',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        },
       })
-    })
+    });
     //pegawai borndate
     $('#lahirPegawai').datepicker({
       format: "dd-mm-yyyy"
@@ -261,17 +193,81 @@
     return /^\d*$/.test(value) && (value === "" || parseInt(value.length) <= 15);
   });
 
-  $('#form-pegawai').validate();
-  setTimeout(function() {
-    $('#nama').rules('add', {
-      required: true
-    })
-    // $('#nama, #tlahir').validate({
-    //   rules: {
-    //     myField: {
-    //       lettersonly: true
-    //     }
-    //   }
-    // });
-  }, 0);
+  $("#hp").inputFilter(function(value) {
+    return /^\d*$/.test(value) && (value === "" || parseInt(value.length) <= 13);
+  });
+
+  function ifExistsNik() {
+    var nik = $("#nik").val();
+    $.ajax({
+      type: "post",
+      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
+      data: {
+        nik: nik
+      },
+      success: function(response) {
+        if (nik == '') {
+          $('.nik').html('<b><i style="color:red">NIK wajib diisi</i></b>');
+        } else {
+          if (nik.length < 16) {
+            $('.nik').html('<b><i style="color:red">NIK tidak lengkap</i></b>');
+          } else {
+            if (response == true) {
+              $('.nik').html('<b><i style="color:green">NIK dapat digunakan</i></b>');
+            } else {
+              $('.nik').html('<b><i style="color:red">NIK sudah terdaftar</i></b>');
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function ifExistsNpwp() {
+    var npwp = $("#npwp").val();
+    $.ajax({
+      type: "post",
+      url: "<?php echo base_url(); ?>admin/DataPegawai/exists",
+      data: {
+        npwp: npwp
+      },
+      success: function(response) {
+        if (npwp == '') {
+          $('.npwp').html('<b><i style="color:red">NPWP wajib diisi</i></b>');
+        } else {
+          if (npwp.length < 15) {
+            $('.npwp').html('<b><i style="color:red">NPWP tidak lengkap</i></b>');
+          } else {
+            if (response == true) {
+              $('.npwp').html('<b><i style="color:green">NPWP dapat digunakan</i></b>');
+            } else {
+              $('.npwp').html('<b><i style="color:red">NPWP sudah terdaftar</i></b>');
+            }
+          }
+        }
+      }
+    });
+  }
+  $('#form-pegawai').validate({
+    rules: {
+      nama_p: {
+        required: true,
+        lettersonly: true
+      },
+      tempat_lahir: {
+        required: true,
+        lettersonly: true
+      }
+    },
+    messages: {
+      nama_p: {
+        required: "<small style='color:red'><i>Nama wajib diisi</i></small>",
+        lettersonly: "<small style='color:red'><i>Hanya dapat diisi huruf</i></small>"
+      },
+      tempat_lahir: {
+        required: "<small style='color:red'><i>Nama wajib diisi</i></small>",
+        lettersonly: "<small style='color:red'><i>Hanya dapat diisi huruf</i></small>"
+      }
+    }
+  });
 </script>
