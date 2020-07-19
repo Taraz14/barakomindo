@@ -65,8 +65,8 @@ class DataPegawai extends CI_Controller
     $explode = explode("-", $input['tanggal_lahir']);
     $tgl = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
 
-    $this->form_validation->set_rules('npwp', 'NPWP', 'required|is_unique[pegawai.npwp]');
-    $this->form_validation->set_rules('nik', 'NIK', 'required|is_unique[pegawai.nik]');
+    $this->form_validation->set_rules('nik', 'NIK', 'required|min_length[16]|is_unique[pegawai.nik]');
+    $this->form_validation->set_rules('npwp', 'NPWP', 'required|min_length[15]|is_unique[pegawai.npwp]');
     $this->form_validation->set_rules('nama_p', 'Nama', 'required');
     $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
     if ($this->form_validation->run() == FALSE) {

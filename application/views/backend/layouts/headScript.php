@@ -36,6 +36,7 @@
   <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/datatables/datatables.css"> -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/backend/bower_components/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/backend/bower_components/sweetalert2/dist/sweetalert2.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css"> -->
   <style>
     .swal2-popup {
       font-size: 1.6rem !important;
