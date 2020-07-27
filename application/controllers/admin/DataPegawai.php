@@ -129,12 +129,9 @@ class DataPegawai extends CI_Controller
 
       // $temp[] = htmlspecialchars(date('d-m-Y / H:i', $pegVal->submit_at), ENT_QUOTES, 'UTF-8');
       $temp[] = '
-      <a href="javascript:void(0)" onclick="detailPegawai(' . "'" . $pegVal->id_pegawai . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Detail" target="">
-          <i class="glyphicon glyphicon-eye-open" style="color:#0a668e"></i>
+      <a href="' . site_url('edit-pegawai/') . $pegVal->id_pegawai . '" class="btn btn-default btn-sm" data-toggle="tooltip" title="Detail" target="_blank">
+          <i class="glyphicon glyphicon-pencil" style="color:#f39c12"></i>
       </a> 
-      <a href="javascript:void(0)" onclick="editPegawai(' . "'" . $pegVal->id_pegawai . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
-          <i class="glyphicon glyphicon-pencil" style="color:#ed9532"></i>
-      </a>
       <a href="javascript:void(0)" onclick="hapusPegawai(' . "'" . $pegVal->id_pegawai . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Hapus" target="">
           <i class="glyphicon glyphicon-trash" style="color:#ff0000"></i>
       </a>';

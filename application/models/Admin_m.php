@@ -31,10 +31,28 @@ class Admin_m extends CI_Model
     $result = $query->result_array();
     return $result;
   }
+
+  public function hapusPegawai($id)
+  {
+    $this->db->where('id_pegawai', $id);
+    $this->db->delete('pegawai');
+  }
+
+  public function pegawai($id_peg)
+  {
+    return $this->db->get_where('pegawai', ['id_pegawai' => $id_peg])->row();
+  }
+
   public function savePegawai($data)
   {
     $this->db->insert('pegawai', $data);
     return $this->db->insert_id();
+  }
+
+  public function updatePegawai($data, $where)
+  {
+    $this->db->update('pegawai', $data, $where);
+    return $this->db->affected_rows();
   }
 
   private function queryPegawai()
@@ -82,12 +100,6 @@ class Admin_m extends CI_Model
   {
     $this->db->from('pegawai');
     return $this->db->count_all_results();
-  }
-
-  public function hapusPegawai($id)
-  {
-    $this->db->where('id_pegawai', $id);
-    $this->db->delete('pegawai');
   }
 
   /**

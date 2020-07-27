@@ -106,14 +106,14 @@
         success: function(data) {
           console.log(data);
           if (data.status == true) {
-            swal({
+            swal.fire({
               title: 'Tambah Sertifikat',
               text: 'Sertifikat berhasil ditambahkan',
               icon: 'success'
             });
             reload_table();
           } else {
-            swal({
+            swal.fire({
               title: 'Gagal',
               text: 'Tidak diketahui',
               icon: 'error',
@@ -141,7 +141,7 @@
   })
 
   function hapusCert(id) {
-    swal({
+    swal.fire({
         title: "Yakin hapus Sertifikat?",
         text: "Jika sudah terhapus maka, tidak dapat dikembalikan!",
         icon: "warning",
@@ -155,14 +155,14 @@
             type: "post",
             dataType: "json",
             success: function(data) {
-              swal("Satu Sertifikat telah dihapus!", {
+              swal.fire("Satu Sertifikat telah dihapus!", {
                 icon: "success",
               });
               reload_table();
             }
           });
         } else {
-          swal("Satu Sertifikat batal dihapus!");
+          swal.fire("error", "Satu Sertifikat batal dihapus!");
         }
       });
   }

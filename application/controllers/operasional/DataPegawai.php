@@ -26,6 +26,38 @@ class DataPegawai extends CI_Controller
       'profile' => $this->operasional_m->profile($id)
     ], FALSE);
   }
+
+  public function getPegawai()
+  {
+    $data = $this->operasional_m->dataPegawai();
+    $peg = [];
+    $no = 1;
+    foreach ($data as $pegVal) {
+      $explode = explode('-', $pegVal->tanggal_lahir);
+      $tgl = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
+      $temp = [];
+      $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->nama_lengkap, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->tempat_lahir . ', ' . $tgl, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->alamat, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->agama, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->gender, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->jenjang, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->status, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->nik, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->npwp, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->email, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($pegVal->no_hp, ENT_QUOTES, 'UTF-8');
+      $peg[] = $temp;
+    }
+
+    $output['draw'] = intval($this->input->get('draw'));
+    $output['recordsTotal'] = $this->operasional_m->countAll();
+    $output['recordsFiltered'] = $this->operasional_m->filtered();
+    $output['data'] = $peg;
+
+    echo json_encode($output);
+  }
 }
 
 /* End of file DataPegawai.php */

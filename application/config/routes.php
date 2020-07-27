@@ -61,6 +61,7 @@ $route['edit-profile'] = 'admin/Profile/profile';
 $route['data-pegawai'] = 'admin/DataPegawai';
 $route['save-pegawai']  = 'admin/DataPegawai/savePegawai';
 $route['add-pegawai'] = 'admin/DataPegawai/addPegawai';
+$route['edit-pegawai/(:any)'] = 'admin/EditPegawai/index/$1';
 $route['data-kapal'] = 'admin/DataKapal';
 $route['add-kapal'] = 'admin/DataKapal/addKapal';
 $route['cert'] = 'admin/CertKapal';

@@ -41,7 +41,8 @@ class CertKapal extends CI_Controller
     $this->upload->initialize($config);
     $upload = $this->upload->do_upload('certFile');
     if (!$upload) {
-      echo $this->upload->display_errors();
+      // echo $this->upload->display_errors();
+      echo json_encode(["status" => FALSE]);
     } else {
       $uploadData = array('uploads' => $this->upload->data());
       $cert = [
@@ -49,7 +50,7 @@ class CertKapal extends CI_Controller
         'id_kapal' => $this->input->post('kapal'), //uploadCert
         'nama_sertifikat' => $this->input->post('namaCert'),
         'file'  => base_url('assets/uploads/sertifikat/' . $uploadData['uploads']['file_name']),
-        'upload_at' => time()
+        // 'upload_at' => $this->input->post('tanggal_upload')
       ];
 
       $this->admin_m->saveCert($cert);
@@ -67,7 +68,7 @@ class CertKapal extends CI_Controller
       $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
-      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
       $temp[] = '<a href="' . $certVal->file . '" target="_blank"><i class="fa fa-file-pdf-o" style="color:#ff0000; font-size:30px;"></i>
 
                 </a>';

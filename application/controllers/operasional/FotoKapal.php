@@ -27,7 +27,47 @@ class FotoKapal extends CI_Controller
       'content' => 'backend/operasional/fotoKapal',
       'title' => 'Foto Kapal',
       'profile' => $this->operasional_m->profile($id),
-      // 'kapal' => $this->operasional_m->getKapal()
+      'kapal' => $this->operasional_m->getKapal(),
+      'data_kapal' => $this->operasional_m->getNKapal()
     ], FALSE);
+  }
+
+  public function uploadFotoKapal()
+  {
+    $config['image_library'] = 'gd2';
+    $config['upload_path']   = './assets/uploads/kapal/';
+    $config['allowed_types'] = 'gif|jpg|jpeg|png';
+    $config['max_size']   = '0';
+    $config['max_width'] = '0';
+    $config['max_height'] = '0';
+    $config['master_dim'] = 'auto';
+    $config['file_name']  = round(microtime(true) * 1000);
+    $config['width'] = '198';
+    $config['height'] = '123';
+    $this->upload->initialize($config);
+    $this->load->library('image_lib', $config);
+    $this->image_lib->resize();
+    $upload = $this->upload->do_upload('gambarKapal');
+    if (!$upload) {
+      echo $this->upload->display_errors();
+    } else {
+      $uploadData = array('uploads' => $this->upload->data());
+      $fkapal = [
+        'id_kapal' => $this->input->post('kapal'), //kapal
+        'foto'  => base_url('assets/uploads/kapal/' . $uploadData['uploads']['file_name']),
+        'post_at' => time()
+      ];
+
+      $this->operasional_m->saveFotoKapal($fkapal);
+      echo json_encode(array("status" => TRUE));
+    }
+  }
+
+  public function downloadFoto()
+  {
+    $get = $this->uri->segment(3);
+    var_dump($get);
+    die();
+    $data['file'] = $get;
   }
 }

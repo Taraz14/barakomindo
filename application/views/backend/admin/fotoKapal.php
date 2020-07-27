@@ -222,7 +222,7 @@
         success: function(data) {
           console.log(data);
           if (data.status == true) {
-            swal({
+            swal.fire({
               title: 'Foto Kapal',
               text: 'Upload Foto Kapal Berhasil',
               icon: 'success'
@@ -230,7 +230,7 @@
             $("#mydiv").load(location.href + " #mydiv");
 
           } else {
-            swal({
+            swal.fire({
               title: 'Gagal',
               text: 'Tidak diketahui',
               icon: 'error',
