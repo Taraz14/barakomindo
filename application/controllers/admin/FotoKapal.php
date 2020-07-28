@@ -66,9 +66,13 @@ class FotoKapal extends CI_Controller
   public function downloadFoto()
   {
     $get = $this->uri->segment(3);
-    var_dump($get);
-    die();
     $data['file'] = $get;
+  }
+
+  public function hapusFoto($id)
+  {
+    $this->admin_m->hapusFkapal($id);
+    echo json_encode(array("status" => TRUE));
   }
 }
 

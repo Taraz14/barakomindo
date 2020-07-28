@@ -75,9 +75,6 @@ class CertKapal extends CI_Controller
 
       // $temp[] = htmlspecialchars(date('d-m-Y / H:i', $pegVal->submit_at), ENT_QUOTES, 'UTF-8');
       $temp[] = '
-      <a href="javascript:void(0)" onclick="editCert(' . "'" . $certVal->id_sertifikat . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
-          <i class="glyphicon glyphicon-pencil" style="color:#ed9532"></i>
-      </a>
       <a href="javascript:void(0)" onclick="hapusCert(' . "'" . $certVal->id_sertifikat . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Hapus" target="">
           <i class="glyphicon glyphicon-trash" style="color:#ff0000"></i>
       </a>';

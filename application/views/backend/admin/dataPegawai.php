@@ -44,6 +44,9 @@
 
   $(function() {
     tablePegawai = $('#pegawai').DataTable({
+      "dom": "<'row'<'col-sm-2'l ><'col-sm-5' B><'col-sm-5' <'datesearchbox'>><'col-sm-5'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
       "processing": true,
       "serverSide": true,
       "scrollX": true,
@@ -53,6 +56,9 @@
         url: "<?= site_url('admin/DataPegawai/getPegawai') ?>",
         'responsive': true
       },
+      buttons: [
+        'excel'
+      ],
       "columnDefs": [{
         "targets": [4, 6, 8, 9],
         "visible": false,

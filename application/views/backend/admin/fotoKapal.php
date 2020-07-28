@@ -165,7 +165,8 @@
                         <div class="mailbox-attachment-info">
                           <div class="mailbox-attachment-name"><i class="fa fa-camera"></i> <?= $valKapal->nama_kapal; ?></div>
                           <span class="mailbox-attachment-size">
-                            <a href="#">Hapus Foto</a>
+                            <a href="javascript:void(0)" onclick="hapusFoto(<?= $valKapal->id_fkapal; ?>)" data-toggle="tooltip" title="Hapus" target="">Hapus Foto</a>
+                            <!-- <a href="#">Hapus Foto</a> -->
                             <a href="<?= site_url('foto-download/') . $valKapal->foto ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                           </span>
                         </div>
@@ -266,5 +267,34 @@
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = "none";
+  }
+
+  function hapusFoto(id) {
+    swal.fire({
+        title: "Yakin hapus Foto?",
+        text: "Jika sudah terhapus maka, tidak dapat dikembalikan!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!'
+      })
+      .then((willDelete) => {
+        if (willDelete.value) {
+          $.ajax({
+            url: "<?= site_url('admin/FotoKapal/hapusFoto/') ?>" + id,
+            type: "post",
+            dataType: "json",
+            success: function(data) {
+              swal.fire("Satu Sertifikat telah dihapus!", {
+                icon: "success",
+              });
+              $("#mydiv").load(location.href + " #mydiv");
+            }
+          });
+        } else {
+          swal.fire("error", "Satu Sertifikat batal dihapus!", "error");
+        }
+      });
   }
 </script>

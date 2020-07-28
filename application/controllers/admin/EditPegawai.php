@@ -22,7 +22,6 @@ class EditPegawai extends CI_Controller
   public function index()
   {
     $id_peg = $this->uri->segment(2);
-
     $id = $this->session->userdata('id_user');
 
     $this->load->view('backend/layouts/wrapper', [
@@ -42,6 +41,7 @@ class EditPegawai extends CI_Controller
     $explode = explode("-", $input['tanggal_lahir']);
     $tgl = $explode[2] . '-' . $explode[1] . '-' . $explode[0];
     $data = [
+      'id_pegawai' => $id,
       'id_pendidikan' => $input['pendidikan'],
       'id_agama'      => $input['agama'],
       'nama_lengkap'  => $input['nama_p'],
@@ -57,8 +57,10 @@ class EditPegawai extends CI_Controller
       'update_at'     => time()
     ];
 
-    $this->admin_m->updatePegawai(['id_pegawai' => $id], $data);
+    // var_dump($data);
+    $this->admin_m->updatePegawai($data, $id);
     echo json_encode(['status' => TRUE]);
+    // redirect('data-pegawai');
   }
 }
 

@@ -81,7 +81,7 @@
                     <b>Terakhir Login</b> <a class="pull-right"><?= date("d-m-Y H:i:s", $profile->last_login); ?></a>
                   </li>
                 </ul>
-                <a href="<?= site_url('admin') ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Kembali</a>
+                <a href="<?= site_url('profile') ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Kembali</a>
                 <a class="btn btn-success pull-right" id="save">Simpan Perubahan</a>
               </div>
             </div>
@@ -126,7 +126,7 @@
           console.log(data);
           if (data.status == true) {
             setTimeout(function() {
-              swal({
+              swal.fire({
                 title: 'Ubah Profile',
                 text: 'Profile berhasil diubah',
                 icon: 'success'
@@ -136,7 +136,7 @@
             }, 1000)
             // $("#prof1, #prof2, #prof3, #profileDisplay").load(location.href + " #profileDisplay");
           } else {
-            swal({
+            swal.fire({
               title: 'Gagal',
               text: 'Tidak diketahui',
               icon: 'error',

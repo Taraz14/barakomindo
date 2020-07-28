@@ -49,10 +49,10 @@ class Admin_m extends CI_Model
     return $this->db->insert_id();
   }
 
-  public function updatePegawai($data, $where)
+  public function updatePegawai($data, $id)
   {
-    $this->db->update('pegawai', $data, $where);
-    return $this->db->affected_rows();
+    return $this->db->replace('pegawai', $data, $id);
+    // $this->db->affected_rows();
   }
 
   private function queryPegawai()
@@ -190,6 +190,12 @@ class Admin_m extends CI_Model
     return $this->db->get('foto_kapal')->result();
   }
 
+  public function hapusFkapal($id)
+  {
+    $this->db->where('id_fkapal', $id);
+    $this->db->delete('foto_kapal');
+  }
+
   /**
    * Data Kapal
    */
@@ -197,6 +203,23 @@ class Admin_m extends CI_Model
   {
     $this->db->insert('kapal', $data);
     return $this->db->insert_id();
+  }
+
+  public function kapal($id_kapal)
+  {
+    return $this->db->get_where('kapal', ['id_kapal' => $id_kapal])->row();
+  }
+
+  public function updateKapal($data, $id)
+  {
+    return $this->db->replace('kapal', $data, $id);
+    // $this->db->affected_rows();
+  }
+
+  public function hapusKapal($id)
+  {
+    $this->db->where('id_kapal', $id);
+    $this->db->delete('kapal');
   }
 
   private function queryKapal()

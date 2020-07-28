@@ -7,9 +7,10 @@
             Edit Pegawai
           </h3>
         </div>
-        <form action="" method="post" id="form-pegawai">
-          <input type="hidden" name="id" value="<?= $this->uri->segment(4) ?>">
+        <form action="<?= site_url('admin/EditPegawai/UpdatePegawai') ?>" method="post" id="form-pegawai">
+          <input type="hidden" name="id" value="<?= $this->uri->segment(2) ?>">
           <div class="box-body">
+
             <div class="form-group row">
               <label for="nama_p" class=" col-sm-2">Nama Lengkap</label>
               <div class="col-sm-10">

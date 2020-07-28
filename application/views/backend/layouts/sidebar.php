@@ -15,14 +15,14 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">NAVIGASI UTAMA</li>
-        <li class="<?php if ($this->uri->segment(1) == 'admin' || $this->uri->segment(1) == 'profile') {
+        <li class="<?php if ($this->uri->segment(1) == 'admin' || $this->uri->segment(1) == 'profile' || $this->uri->segment(1) == 'edit-profile') {
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('admin') ?>">
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
         </li>
-        <li class="<?php if ($this->uri->segment(1) == 'data-pegawai' || $this->uri->segment(1) == 'add-pegawai') {
+        <li class="<?php if ($this->uri->segment(1) == 'data-pegawai' || $this->uri->segment(1) == 'add-pegawai' || $this->uri->segment(1) == 'edit-pegawai') {
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('data-pegawai') ?>">

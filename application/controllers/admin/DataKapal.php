@@ -54,6 +54,12 @@ class DataKapal extends CI_Controller
     echo json_encode(["status" => TRUE]);
   }
 
+  public function hapusKapal($id)
+  {
+    $this->admin_m->hapusKapal($id);
+    echo json_encode(array("status" => TRUE));
+  }
+
   public function getKapal()
   {
     $data = $this->admin_m->dataKapal();
@@ -69,7 +75,7 @@ class DataKapal extends CI_Controller
       $temp[] = htmlspecialchars($kapVal->call_sign, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars(date("d-m-Y", $kapVal->submit_at), ENT_QUOTES, 'UTF-8');
       $temp[] = '
-      <a href="javascript:void(0)" onclick="editKapal(' . "'" . $kapVal->id_kapal . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
+      <a href="' . site_url('edit-kapal/') . $kapVal->id_kapal . '" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
           <i class="glyphicon glyphicon-pencil" style="color:#ed9532"></i>
       </a>
       <a href="javascript:void(0)" onclick="hapusKapal(' . "'" . $kapVal->id_kapal . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Hapus" target="">

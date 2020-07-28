@@ -131,7 +131,7 @@
       "processing": true,
       "serverSide": true,
       "scrollX": true,
-      "scrollY": "200px",
+      // "scrollY": "200px",
       "order": [],
       "ajax": {
         url: "<?= site_url('admin/CertKapal/getCert') ?>",
@@ -145,11 +145,13 @@
         title: "Yakin hapus Sertifikat?",
         text: "Jika sudah terhapus maka, tidak dapat dikembalikan!",
         icon: "warning",
-        buttons: true,
-        dangerMode: true,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!'
       })
       .then((willDelete) => {
-        if (willDelete) {
+        if (willDelete.value) {
           $.ajax({
             url: "<?= site_url('admin/CertKapal/hapusCert/') ?>" + id,
             type: "post",
@@ -162,7 +164,7 @@
             }
           });
         } else {
-          swal.fire("error", "Satu Sertifikat batal dihapus!");
+          swal.fire("error", "Satu Sertifikat batal dihapus!", "error");
         }
       });
   }
