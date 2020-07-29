@@ -125,7 +125,7 @@
         <form id="form-kapal" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group row">
-              <label for="kapal" class=" col-sm-2">Kapal</label>
+              <label for="kapal" class=" col-sm-2">Kapal<br><i>Ship Name</i></label>
               <div class="col-sm-10">
                 <select class="form-control" name="kapal">
                   <option selected hidden>--Pilih Kapal--</option>
@@ -136,7 +136,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="gambarKapal" class=" col-sm-2">Upload</label>
+              <label for="gambarKapal" class=" col-sm-2">Unggah<br><i>Upload</i></label>
               <div class="col-sm-5">
                 <input type="file" class="form-control" name="gambarKapal" accept="image/*">
               </div>

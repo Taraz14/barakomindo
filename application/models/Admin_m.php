@@ -166,7 +166,7 @@ class Admin_m extends CI_Model
 
   public function getCertVal($id)
   {
-    return $this->db->get_where('sertifikat_kapal', $id)->result();
+    return $this->db->get_where('sertifikat_kapal', ['id_sertifikat' => $id])->result();
   }
 
   public function hapusCert($id)

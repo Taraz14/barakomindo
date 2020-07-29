@@ -50,16 +50,8 @@ class LapBulanan extends CI_Controller
       $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama . ' (' . $role . ')', ENT_QUOTES, 'UTF-8');
-      $temp[] = htmlspecialchars(date("d/m/Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
-      // $temp[] = htmlspecialchars($certVal->upload_at, ENT_QUOTES, 'UTF-8');
-
-      // $temp[] = '<a href="' . $certVal->file . '" target="_blank"><i class="fa fa-file-pdf-o" style="color:#ff0000; font-size:30px;"></i>
-
-      //           </a>';
-      // $temp[] = '
-      // <a href="javascript:void(0)" onclick="viewCert(' . "'" . $certVal->id_sertifikat . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
-      //     <i class="glyphicon glyphicon-eye-open" style="color:#3f0000"></i>
-      // </a>';
+      // $temp[] = htmlspecialchars(date("d/m/Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
       $cert[] = $temp;
     }
 

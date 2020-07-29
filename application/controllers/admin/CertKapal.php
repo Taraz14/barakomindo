@@ -22,12 +22,14 @@ class CertKapal extends CI_Controller
   public function index()
   {
     $id = $this->session->userdata('id_user');
-
+    // unlink('assets/uploads/sertifikat/1595985420585.pdf');
     $this->load->view('backend/layouts/wrapper', [
       'content' => 'backend/admin/certKapal',
       'title' => 'Sertifikat Kapal',
       'profile' => $this->admin_m->profile($id),
-      'data_kapal' => $this->admin_m->getNKapal()
+      'data_kapal' => $this->admin_m->getNKapal(),
+      // 'cert' => $this->admin_m->getCertVal($id)
+
     ], FALSE);
   }
 
@@ -45,17 +47,46 @@ class CertKapal extends CI_Controller
       echo json_encode(["status" => FALSE]);
     } else {
       $uploadData = array('uploads' => $this->upload->data());
+
+      $date = explode(' - ', $this->input->post('exp'));
+      $startReplace = str_replace('/', '-', $date[0]);
+      $endReplace = str_replace('/', '-', $date[1]);
+      $startDate = date("Y-m-d", strtotime($startReplace));
+      $endDate = date("Y-m-d", strtotime($endReplace));
+
       $cert = [
         'id_user' => $id,
         'id_kapal' => $this->input->post('kapal'), //uploadCert
         'nama_sertifikat' => $this->input->post('namaCert'),
-        'file'  => base_url('assets/uploads/sertifikat/' . $uploadData['uploads']['file_name']),
-        // 'upload_at' => $this->input->post('tanggal_upload')
+        'file'  => $uploadData['uploads']['file_name'],
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'upload_at' => time()
       ];
 
       $this->admin_m->saveCert($cert);
       echo json_encode(array("status" => TRUE));
     }
+  }
+
+  public function dumpData()
+  {
+    $id = $this->session->userdata('id_user');
+    $tes = $this->input->post();
+    $date = explode(' - ', $tes['exp']);
+    $startReplace = str_replace('/', '-', $date[0]);
+    $endReplace = str_replace('/', '-', $date[1]);
+    $startDate = date("Y-m-d", strtotime($startReplace));
+    $endDate = date("Y-m-d", strtotime($endReplace));
+    echo $startDate . ' - ' . $endDate;
+    die();
+    $data = [
+      'id_kapal' => $tes['kapal'],
+      'id_user' => $id,
+      'nama_sertifikat' => $tes['namaCert'],
+      'file' => NULL,
+      'startDate'
+    ];
   }
 
   public function getCert()
@@ -68,8 +99,8 @@ class CertKapal extends CI_Controller
       $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
-      $temp[] = htmlspecialchars(date("d-m-Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
-      $temp[] = '<a href="' . $certVal->file . '" target="_blank"><i class="fa fa-file-pdf-o" style="color:#ff0000; font-size:30px;"></i>
+      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
+      $temp[] = '<a href="' . base_url('assets/uploads/sertifikat/') . $certVal->file . '" target="_blank"><i class="fa fa-file-pdf-o" style="color:#ff0000; font-size:30px;"></i>
 
                 </a>';
 
@@ -91,6 +122,10 @@ class CertKapal extends CI_Controller
 
   public function hapusCert($id)
   {
+    $cert = $this->admin_m->getCertVal($id);
+    foreach ($cert as $v) {
+      unlink('assets/uploads/sertifikat/' . $v->file);
+    }
     $this->admin_m->hapusCert($id);
     echo json_encode(array("status" => TRUE));
   }

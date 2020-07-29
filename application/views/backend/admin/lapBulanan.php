@@ -177,9 +177,9 @@
 
     //menangani proses saat apply date range
     $('#datesearch').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-      start_date = picker.startDate.format('DD/MM/YYYY');
-      end_date = picker.endDate.format('DD/MM/YYYY');
+      $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+      start_date = picker.startDate.format('YYYY-MM-DD');
+      end_date = picker.endDate.format('YYYY-MM-DD');
       $.fn.dataTableExt.afnFiltering.push(DateFilterFunction);
       $dTable.draw();
       console.log(start_date + '-' + end_date);
