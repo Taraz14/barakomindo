@@ -9,7 +9,7 @@
         </div>
         <div class="pull-left info">
           <p><?= $profile->nama; ?></p>
-          <i class="fa fa-calendar"></i> <?= date("Y-m-d"); ?>
+          <i class="fa fa-calendar"></i> <?= date("d-M-Y"); ?>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -53,13 +53,35 @@
             <span>Foto Kapal</span>
           </a>
         </li>
-        <li class="<?php if ($this->uri->segment(1) == 'lap-bulanan') {
-                      echo 'active';
-                    } ?>">
+        <!-- <li class="<?php if ($this->uri->segment(1) == 'lap-bulanan') {
+                          echo 'active';
+                        } ?>">
           <a href="<?= site_url('lap-bulanan') ?>">
             <i class="fa fa-laptop"></i>
             <span>Laporan Bulanan</span>
           </a>
+        </li> -->
+        <li class="treeview <?php if ($this->uri->segment(1) == 'on-going' || $this->uri->segment(1) == 'lap-expired' || $this->uri->segment(1) == 'lap-deleted') {
+                              echo 'active';
+                            } ?>">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if ($this->uri->segment(1) == 'on-going') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('on-going') ?>"><i class="fa fa-circle-o text-info"></i> On - Going</a></li>
+            <li class="<?php if ($this->uri->segment(1) == 'lap-expired') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('lap-expired') ?>"><i class="fa fa-circle-o text-warning"></i> Expired</a></li>
+            <li class="<?php if ($this->uri->segment(1) == 'lap-deleted') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('lap-deleted') ?>"><i class="fa fa-circle-o text-danger"></i> Deleted</a></li>
+          </ul>
         </li>
       </ul>
     </section>

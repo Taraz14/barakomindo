@@ -6,7 +6,7 @@ class CertKapal extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('admin_m');
+    $this->load->model(array('admin_m', 'lap_m'));
     $this->load->helper('file');
     if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 99) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
@@ -64,7 +64,18 @@ class CertKapal extends CI_Controller
         'upload_at' => time()
       ];
 
+      $lapCert = [
+        'id_user' => $id,
+        'id_kapal' => $this->input->post('kapal'), //uploadCert
+        'nama_sertifikat' => $this->input->post('namaCert'),
+        // 'file'  => $uploadData['uploads']['file_name'],
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'upload_at' => time()
+      ];
+
       $this->admin_m->saveCert($cert);
+      $this->lap_m->saveLap($lapCert);
       echo json_encode(array("status" => TRUE));
     }
   }

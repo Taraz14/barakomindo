@@ -68,6 +68,11 @@ $route['edit-kapal/(:any)'] = 'admin/EditKapal/index/$1';
 $route['cert'] = 'admin/CertKapal';
 $route['foto-kapal'] = 'admin/fotoKapal';
 $route['foto-download'] = 'admin/fotoKapal/downloadFoto';
+//lap
+$route['on-going'] = 'admin/LapOnGoing';
+$route['lap-expired'] = 'admin/LapExpired';
+$route['lap-deleted'] = 'admin/LapDeleted';
+
 $route['lap-bulanan'] = 'admin/LapBulanan';
 
 //operasional

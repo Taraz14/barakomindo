@@ -45,6 +45,7 @@ class LapBulanan extends CI_Controller
       } else if ($certVal->role == 77) {
         $role = 'Kepala Cabang';
       }
+
       $temp = [];
       $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
@@ -58,6 +59,70 @@ class LapBulanan extends CI_Controller
     $output['draw'] = intval($this->input->get('draw'));
     $output['recordsTotal'] = $this->lap_m->countAllCert();
     $output['recordsFiltered'] = $this->lap_m->filterCert();
+    $output['data'] = $cert;
+
+    echo json_encode($output);
+  }
+
+  public function getExp()
+  {
+    $data = $this->lap_m->dataExp();
+    $cert = [];
+    $no = 1;
+    foreach ($data as $certVal) {
+      if ($certVal->role == 99) {
+        $role = 'Admin';
+      } else if ($certVal->role == 88) {
+        $role = 'Operasional';
+      } else if ($certVal->role == 77) {
+        $role = 'Kepala Cabang';
+      }
+
+      $temp = [];
+      $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama . ' (' . $role . ')', ENT_QUOTES, 'UTF-8');
+      // $temp[] = htmlspecialchars(date("d/m/Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
+      $cert[] = $temp;
+    }
+
+    $output['draw'] = intval($this->input->get('draw'));
+    $output['recordsTotal'] = $this->lap_m->countAllExp();
+    $output['recordsFiltered'] = $this->lap_m->filterExp();
+    $output['data'] = $cert;
+
+    echo json_encode($output);
+  }
+
+  public function getDeleted()
+  {
+    $data = $this->lap_m->dataDeleted();
+    $cert = [];
+    $no = 1;
+    foreach ($data as $certVal) {
+      if ($certVal->role == 99) {
+        $role = 'Admin';
+      } else if ($certVal->role == 88) {
+        $role = 'Operasional';
+      } else if ($certVal->role == 77) {
+        $role = 'Kepala Cabang';
+      }
+
+      $temp = [];
+      $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars($certVal->nama . ' (' . $role . ')', ENT_QUOTES, 'UTF-8');
+      // $temp[] = htmlspecialchars(date("d/m/Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
+      $cert[] = $temp;
+    }
+
+    $output['draw'] = intval($this->input->get('draw'));
+    $output['recordsTotal'] = $this->lap_m->countAllDeleted();
+    $output['recordsFiltered'] = $this->lap_m->filterDeleted();
     $output['data'] = $cert;
 
     echo json_encode($output);
