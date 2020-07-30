@@ -137,6 +137,10 @@ class CertKapal extends CI_Controller
     foreach ($cert as $v) {
       unlink('assets/uploads/sertifikat/' . $v->file);
     }
+    $isDeleted = [
+      'is_deleted' => 1
+    ];
+    $this->lap_m->is_deleted($id, $isDeleted);
     $this->admin_m->hapusCert($id);
     echo json_encode(array("status" => TRUE));
   }

@@ -136,9 +136,7 @@
                       <div class="mailbox-attachment-info">
                         <div class="mailbox-attachment-name"><i class="fa fa-camera"></i> <?= $valKapal->nama_kapal; ?></div>
                         <span class="mailbox-attachment-size">
-                          <a href="#">Hapus Foto</a>
-                          <a href="<?= site_url('foto-download/') . $valKapal->foto ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                        </span>
+
                       </div>
                     </li>
                   <?php } ?>

@@ -137,13 +137,35 @@
             <span>Foto Kapal</span>
           </a>
         </li>
-        <li class="<?php if ($this->uri->segment(2) == 'lap-bulanan') {
-                      echo 'active';
-                    } ?>">
+        <!-- <li class="<?php if ($this->uri->segment(2) == 'lap-bulanan') {
+                          echo 'active';
+                        } ?>">
           <a href="<?= site_url('op/lap-bulanan') ?>">
             <i class="fa fa-laptop"></i>
             <span>Laporan Bulanan</span>
           </a>
+        </li> -->
+        <li class="treeview <?php if ($this->uri->segment(2) == 'on-going' || $this->uri->segment(2) == 'lap-expired' || $this->uri->segment(2) == 'lap-deleted') {
+                              echo 'active';
+                            } ?>">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if ($this->uri->segment(2) == 'on-going') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('op/on-going') ?>"><i class="fa fa-circle-o text-info"></i> On - Going</a></li>
+            <li class="<?php if ($this->uri->segment(2) == 'lap-expired') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('op/lap-expired') ?>"><i class="fa fa-circle-o text-warning"></i> Expired</a></li>
+            <li class="<?php if ($this->uri->segment(2) == 'lap-deleted') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('op/lap-deleted') ?>"><i class="fa fa-circle-o text-danger"></i> Deleted</a></li>
+          </ul>
         </li>
       </ul>
     </section>
@@ -184,6 +206,14 @@
             <span>Data Pegawai</span>
           </a>
         </li>
+        <li class="<?php if ($this->uri->segment(2) == 'data-kapal') {
+                      echo 'active';
+                    } ?>">
+          <a href="<?= site_url('kc/data-kapal') ?>">
+            <i class="fa fa-ship"></i>
+            <span>Data Kapal</span>
+          </a>
+        </li>
         <li class="<?php if ($this->uri->segment(2) == 'cert') {
                       echo 'active';
                     } ?>">
@@ -195,17 +225,39 @@
                       echo 'active';
                     } ?>">
           <a href="<?= site_url('kc/foto-kapal') ?>">
-            <i class="fa fa-ship"></i>
+            <i class="fa fa-picture-o"></i>
             <span>Foto Kapal</span>
           </a>
         </li>
-        <li class="<?php if ($this->uri->segment(2) == 'lap-bulanan') {
-                      echo 'active';
-                    } ?>">
+        <!-- <li class="<?php if ($this->uri->segment(2) == 'lap-bulanan') {
+                          echo 'active';
+                        } ?>">
           <a href="<?= site_url('kc/lap-bulanan') ?>">
             <i class="fa fa-laptop"></i>
             <span>Laporan Bulanan</span>
           </a>
+        </li> -->
+        <li class="treeview <?php if ($this->uri->segment(2) == 'on-going' || $this->uri->segment(2) == 'lap-expired' || $this->uri->segment(2) == 'lap-deleted') {
+                              echo 'active';
+                            } ?>">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if ($this->uri->segment(2) == 'on-going') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('kc/on-going') ?>"><i class="fa fa-circle-o text-info"></i> On - Going</a></li>
+            <li class="<?php if ($this->uri->segment(2) == 'lap-expired') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('kc/lap-expired') ?>"><i class="fa fa-circle-o text-warning"></i> Expired</a></li>
+            <li class="<?php if ($this->uri->segment(2) == 'lap-deleted') {
+                          echo 'active';
+                        } ?>"><a href="<?= site_url('kc/lap-deleted') ?>"><i class="fa fa-circle-o text-danger"></i> Deleted</a></li>
+          </ul>
         </li>
       </ul>
     </section>

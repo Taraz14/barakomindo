@@ -6,7 +6,7 @@ class CertKapal extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('operasional_m');
+    $this->load->model(array('operasional_m', 'lap_m'));
     $this->load->helper('file');
     if ($this->session->userdata('logged_in') !== TRUE || $this->session->userdata('role') != 88) {
       $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
@@ -45,18 +45,39 @@ class CertKapal extends CI_Controller
       echo json_encode(["status" => FALSE]);
     } else {
       $uploadData = array('uploads' => $this->upload->data());
+
+      $date = explode(' - ', $this->input->post('exp'));
+      $startReplace = str_replace('/', '-', $date[0]);
+      $endReplace = str_replace('/', '-', $date[1]);
+      $startDate = date("Y-m-d", strtotime($startReplace));
+      $endDate = date("Y-m-d", strtotime($endReplace));
+
       $cert = [
         'id_user' => $id,
         'id_kapal' => $this->input->post('kapal'), //uploadCert
         'nama_sertifikat' => $this->input->post('namaCert'),
-        'file'  => base_url('assets/uploads/sertifikat/' . $uploadData['uploads']['file_name']),
-        // 'upload_at' => $this->input->post('tanggal_upload')
+        'file'  => $uploadData['uploads']['file_name'],
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'upload_at' => time()
+      ];
+
+      $lapCert = [
+        'id_user' => $id,
+        'id_kapal' => $this->input->post('kapal'), //uploadCert
+        'nama_sertifikat' => $this->input->post('namaCert'),
+        // 'file'  => $uploadData['uploads']['file_name'],
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'upload_at' => time()
       ];
 
       $this->operasional_m->saveCert($cert);
+      $this->lap_m->saveLap($lapCert);
       echo json_encode(array("status" => TRUE));
     }
   }
+
 
   public function getCert()
   {
@@ -68,19 +89,10 @@ class CertKapal extends CI_Controller
       $temp[] = htmlspecialchars($no++, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_kapal, ENT_QUOTES, 'UTF-8');
       $temp[] = htmlspecialchars($certVal->nama_sertifikat, ENT_QUOTES, 'UTF-8');
-      $temp[] = htmlspecialchars(date("d-m-Y", strtotime($certVal->upload_at)), ENT_QUOTES, 'UTF-8');
+      $temp[] = htmlspecialchars(date("d-m-Y", $certVal->upload_at), ENT_QUOTES, 'UTF-8');
       $temp[] = '<a href="' . $certVal->file . '" target="_blank"><i class="fa fa-file-pdf-o" style="color:#ff0000; font-size:30px;"></i>
 
                 </a>';
-
-      // $temp[] = htmlspecialchars(date('d-m-Y / H:i', $pegVal->submit_at), ENT_QUOTES, 'UTF-8');
-      $temp[] = '
-      <a href="javascript:void(0)" onclick="editCert(' . "'" . $certVal->id_sertifikat . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Edit Pegawai" target="">
-          <i class="glyphicon glyphicon-pencil" style="color:#ed9532"></i>
-      </a>
-      <a href="javascript:void(0)" onclick="hapusCert(' . "'" . $certVal->id_sertifikat . "'" . ')" class="btn btn-default btn-sm" data-toggle="tooltip" title="Hapus" target="">
-          <i class="glyphicon glyphicon-trash" style="color:#ff0000"></i>
-      </a>';
       $cert[] = $temp;
     }
 

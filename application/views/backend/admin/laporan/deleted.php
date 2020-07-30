@@ -45,6 +45,24 @@
 
 <script>
   $(function() {
-    var ongoing = $('#deleted').DataTable();
+    var ongoing = $('#deleted').DataTable({
+      "dom": "<'row'<'col-sm-12 col-md-6'lB><'col-sm-12 col-md-6'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+      "fixedHeader": true,
+      "processing": true,
+      "serverSide": true,
+      "scrollX": true,
+      "scrollY": "200px",
+      "order": [],
+      "ajax": {
+        url: "<?= site_url('admin/LapDeleted/getDeleted') ?>",
+        'responsive': true,
+      },
+      buttons: [
+        'excel',
+        'print'
+      ],
+    });
   });
 </script>

@@ -11,7 +11,7 @@
         <form id="form-sertifikat" method="post" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group row">
-              <label for="kapal" class=" col-sm-2">Kapal</label>
+              <label for="kapal" class=" col-sm-2">Kapal<br><i>Ship Name</i></label>
               <div class="col-sm-10">
                 <select class="form-control" name="kapal">
                   <option selected hidden>--Pilih Kapal--</option>
@@ -22,19 +22,19 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="namaCert" class=" col-sm-2">Nama Sertifikat</label>
+              <label for="namaCert" class=" col-sm-2">Nama Sertifikat<br><i>Certificate Name</i></label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="namaCert" placeholder="Masukkan Nama Sertifikat">
               </div>
             </div>
             <div class="form-group row">
-              <label for="certFile" class=" col-sm-2">Upload</label>
+              <label for="certFile" class=" col-sm-2">Unggah<br><i>Upload</i></label>
               <div class="col-sm-5">
                 <input type="file" class="form-control" name="certFile" accept="application/pdf">
               </div>
               <div class=" col-sm-5">
                 <div class="input-group">
-                  <input type="text" class="form-control" id="reservation" name="tanggal_upload" value="<?= date('d-m-Y'); ?>" readonly>
+                  <input type="text" class="form-control" id="reservation" name="exp" value="<?= date('d-m-Y'); ?>" readonly>
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
@@ -47,6 +47,7 @@
                 <div class="row">
                   <div class="col-sm-2 pull-right">
                     <a class="btn btn-success btn-block" id="save">Simpan <i class="fa fa-send"></i></a>
+                    <!-- <button class="btn btn-success btn-block">Simpan <i class="fa fa-send"></i></button> -->
                   </div>
                 </div>
               </div>
@@ -73,7 +74,6 @@
                 <th>Nama Sertifikat</th>
                 <th>Tanggal Upload</th>
                 <th>File Upload</th>
-                <th>Aksi</th>
               </thead>
             </table>
           </div>
@@ -84,6 +84,9 @@
 </section>
 <script>
   var tableCert;
+  var startDate;
+  var endDate;
+
 
   function reload_table() {
     tableCert.ajax.reload(null, false); //reload datatable ajax 
@@ -91,7 +94,12 @@
 
   $(function() {
     //Date range picker
-    $('#reservation').daterangepicker()
+    $('#reservation').daterangepicker({
+      initialText: 'Expired',
+      locale: {
+        format: 'DD/MM/YYYY'
+      }
+    });
 
     //ajax save
     $('#save').click(function() {

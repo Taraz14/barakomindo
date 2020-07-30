@@ -81,15 +81,25 @@ $route['op/profile'] = 'operasional/Profile';
 $route['op/data-pegawai'] = 'operasional/DataPegawai';
 $route['op/cert'] = 'operasional/CertKapal';
 $route['op/foto-kapal'] = 'operasional/fotoKapal';
+//lap
+$route['op/on-going'] = 'operasional/LapOnGoing';
+$route['op/lap-expired'] = 'operasional/LapExpired';
+$route['op/lap-deleted'] = 'operasional/LapDeleted';
+
 $route['op/lap-bulanan'] = 'operasional/lapBulanan';
 
 //Kepala Cabang
 $route['kecab'] = 'kecab/home';
 $route['kc/profile'] = 'kecab/Profile';
 $route['kc/data-pegawai'] = 'kecab/DataPegawai';
+$route['kc/data-kapal'] = 'kecab/DataKapal';
 $route['kc/cert'] = 'kecab/CertKapal';
 $route['kc/foto-kapal'] = 'kecab/fotoKapal';
 $route['kc/lap-bulanan'] = 'kecab/lapBulanan';
+//lap
+$route['kc/on-going'] = 'kecab/LapOnGoing';
+$route['kc/lap-expired'] = 'kecab/LapExpired';
+$route['kc/lap-deleted'] = 'kecab/LapDeleted';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

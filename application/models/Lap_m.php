@@ -42,6 +42,8 @@ class Lap_m extends CI_Model
     $this->db->join('kapal k', 'sk.id_kapal = k.id_kapal', 'left');
     $this->db->join('user u', 'sk.id_user = u.id_user', 'left');
     $this->db->where('endDate >', date("Y-m-d"));
+    $this->db->where('is_deleted', 0);
+
 
 
     if ($this->input->get('search')['value']) {
@@ -90,11 +92,9 @@ class Lap_m extends CI_Model
     $this->db->from('laporan_dump sk');
     $this->db->join('kapal k', 'sk.id_kapal = k.id_kapal', 'left');
     $this->db->join('user u', 'sk.id_user = u.id_user', 'left');
-    // $endDate = $this->db->select('endDate') < date("Y-m-d");
-    // if ($endDate) {
-    $this->db->where('endDate < ', date("Y-m-d"));
-    // }
 
+    $this->db->where('endDate < ', date("Y-m-d"));
+    $this->db->where('is_deleted', 0);
 
     if ($this->input->get('search')['value']) {
       $this->db->like('k.nama_kapal', $this->input->get('search')['value']);
@@ -179,6 +179,11 @@ class Lap_m extends CI_Model
   {
     $this->db->from('sertifikat_kapal');
     return $this->db->count_all_results();
+  }
+
+  public function is_deleted($id, $isDeleted)
+  {
+    return $this->db->update('laporan_dump', $isDeleted, ['id_lap' => $id]);
   }
 }
 
