@@ -44,12 +44,8 @@ class DataPegawai extends CI_Controller
   {
     $npwp = $this->input->post('npwp');
     $nik = $this->input->post('nik');
-
     $exists = $this->admin_m->exists($npwp, $nik);
-
     $count = count($exists);
-    // echo $count 
-
     if (empty($count)) {
       echo true;
     } else {
