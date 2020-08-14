@@ -44,8 +44,10 @@ class Profile extends CI_Controller
   {
     $id = $this->session->userdata('id_user');
     //config tanggal
-    // $getTgl = explode('/', $this->input->post('tanggal_lahir'));
-    // $tgl = $getTgl[2] . '-' . $getTgl[0] . '-' . $getTgl[1];
+    $getTgl = explode('-', $this->input->post('tanggal_lahir'));
+    $tgl = $getTgl[2] . '-' . $getTgl[1] . '-' . $getTgl[0];
+    // echo $tgl;
+    // die();
     //upload
     $config['upload_path']   = './assets/uploads/profile/';
     $config['allowed_types'] = 'jpg|png|jpeg|gif';
@@ -60,7 +62,7 @@ class Profile extends CI_Controller
         'nama' => $input['nama'],
         'email' => $input['email'],
         'tempat_lahir' => $input['tempat_lahir'],
-        'tanggal_lahir' => $input['tanggal_lahir'],
+        'tanggal_lahir' => $tgl,
         'alamat'  => $input['alamat'],
         'no_hp' => $input['no_hp']
       ];
