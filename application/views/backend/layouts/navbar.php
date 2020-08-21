@@ -52,12 +52,18 @@ if ($profile->role == 99) {
 
             <!-- Menu Footer-->
             <li class="user-footer">
-              <div class="pull-left">
-                <a href="<?= $prof; ?>" class="btn btn-default btn-flat">Profile</a>
-              </div>
-              <div class="pull-right">
-                <a href="<?= site_url('logout'); ?>" class="btn btn-danger btn-flat">Sign out</a>
-              </div>
+              <?php if ($profile->role == 99) { ?>
+                <div class="pull-left">
+                  <a href="<?= site_url('profile'); ?>" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="<?= site_url('logout'); ?>" class="btn btn-danger btn-flat">Sign out</a>
+                </div>
+              <?php } else { ?>
+                <div class="">
+                  <a href="<?= site_url('logout'); ?>" class="btn btn-danger btn-flat btn-block">Sign out</a>
+                </div>
+              <?php } ?>
             </li>
           </ul>
         </li>
