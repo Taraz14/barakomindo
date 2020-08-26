@@ -46,6 +46,8 @@
                   <option value="3">D4</option>
                   <option value="4">S1</option>
                   <option value="5">S2</option>
+                  <option value="6">S3</option>
+
                 </select>
               </div>
             </div>
