@@ -286,14 +286,14 @@
             type: "post",
             dataType: "json",
             success: function(data) {
-              swal.fire("Satu Sertifikat telah dihapus!", {
+              swal.fire("Satu Foto telah dihapus!", {
                 icon: "success",
               });
               $("#mydiv").load(location.href + " #mydiv");
             }
           });
         } else {
-          swal.fire("error", "Satu Sertifikat batal dihapus!", "error");
+          swal.fire("error", "Satu Foto batal dihapus!", "error");
         }
       });
   }

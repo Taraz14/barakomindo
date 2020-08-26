@@ -46,8 +46,6 @@ class Profile extends CI_Controller
     //config tanggal
     $getTgl = explode('-', $this->input->post('tanggal_lahir'));
     $tgl = $getTgl[2] . '-' . $getTgl[1] . '-' . $getTgl[0];
-    // echo $tgl;
-    // die();
     //upload
     $config['upload_path']   = './assets/uploads/profile/';
     $config['allowed_types'] = 'jpg|png|jpeg|gif';

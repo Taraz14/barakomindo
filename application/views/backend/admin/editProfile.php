@@ -45,7 +45,7 @@
                 <label for="tanggal_lahir" class="col-sm-2 control-label">Tanggal Lahir</label>
                 <div class="col-sm-10">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="tgl_lahir" name="tanggal_lahir" value="<?= date("d-m-Y", strtotime($profile->tanggal_lahir)) ?>" readonly>
+                    <input type="text" class="form-control" id="tgl_lahir" name="tanggal_lahir" value="<?= date("d-m-Y", strtotime($profile->tanggal_lahir))?>" readonly>
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
@@ -94,9 +94,7 @@
 </section>
 <!-- /.content -->
 <script>
-  $('#tgl_lahir').datepicker({
-    format: "dd-mm-yyyy"
-  });
+  $('#tgl_lahir').datepicker({format : 'dd-mm-yyyy'});
 
   function triggerClick(e) {
     document.querySelector('#profileImage').click();

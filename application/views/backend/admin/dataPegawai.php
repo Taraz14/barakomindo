@@ -75,7 +75,7 @@
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus!'
+        confirmButtonText: 'Ya, hapus!'
       })
       .then((willDelete) => {
         if (willDelete.value) {

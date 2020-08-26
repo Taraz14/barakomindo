@@ -33,8 +33,10 @@ class EditProfile extends CI_Controller
   {
     $id = $this->session->userdata('id_user');
     //config tanggal
-    $getTgl = explode('/', $this->input->post('tanggal_lahir'));
-    $tgl = $getTgl[2] . '-' . $getTgl[0] . '-' . $getTgl[1];
+    $getTgl = explode('-', $this->input->post('tanggal_lahir'));
+    $tgl = $getTgl[2] . '-' . $getTgl[1] . '-' . $getTgl[0];
+echo $tgl;
+die();
     //upload
     $config['upload_path']   = './assets/uploads/profile/';
     $config['allowed_types'] = 'jpg|png|jpeg|gif';
